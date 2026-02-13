@@ -79,6 +79,33 @@
           }
         },
         {
+          type: 'ask',
+          title: 'The Ask',
+          content: {
+            headline: 'One Framework. Every Project. Everyone Contributes.',
+            cards: [
+              {
+                icon: Target,
+                color: 'cyan',
+                title: 'One Standard',
+                body: 'Every project follows the same maturity model. No special cases, no exceptions.'
+              },
+              {
+                icon: Shield,
+                color: 'lime',
+                title: 'Shared Ownership',
+                body: 'QA, Dev, and IT all contribute. Pick any project, check its status, move it forward.'
+              },
+              {
+                icon: Rocket,
+                color: 'purple',
+                title: 'EOY Target',
+                body: 'Every active project reaches full AI-augmented workflow capability by end of year.'
+              }
+            ]
+          }
+        },
+        {
           type: 'philosophy',
           title: 'Core Philosophy',
           content: {
@@ -102,8 +129,8 @@
           content: {
             headline: 'Five Levels to AI-Ready',
             levels: [
-              { level: 1, name: 'The Workspace', color: 'purple', icon: FileText, focus: 'Structural', items: ['Monorepo', 'Linting', 'Logging'] },
-              { level: 2, name: 'The Context', color: 'cyan', icon: Code, focus: 'Instructional', items: ['Docs', 'AI Context'] },
+              { level: 1, name: 'The Foundation', color: 'purple', icon: FileText, focus: 'Structural', items: ['Monorepo'] },
+              { level: 2, name: 'Standards & Context', color: 'cyan', icon: Code, focus: 'Instructional', items: ['Linting', 'Logging', 'Docs', 'AI Context'] },
               { level: 3, name: 'The Safety Net', color: 'lime', icon: Shield, focus: 'Verification', items: ['Tests', 'Percy', 'QA Shift'] },
               { level: 4, name: 'The Cloud', color: 'cyan', icon: Cloud, focus: 'IT Integration', items: ['CloudWatch', 'Terraform'] },
               { level: 5, name: 'The Grand Goal', color: 'purple', icon: Rocket, focus: 'Autonomous', items: ['AI Workflow'] }
@@ -112,27 +139,27 @@
         },
         {
           type: 'level-detail',
-          title: 'Level 1: The Workspace',
+          title: 'Level 1: The Foundation',
           content: {
-            phase: 'Structural Foundation', color: 'purple', icon: FileText,
+            phase: 'Monorepo Foundation', color: 'purple', icon: FileText,
             checklist: [
-              { item: 'Monorepo Conversion', rationale: 'The lead domino. Enables unified CI/CD and shared AI prompts across 30+ projects.', critical: true },
-              { item: 'Linting & Standards', rationale: 'AI is a copy-cat. Messy code = messy AI output. Linting provides automated quality gates.', critical: true },
-              { item: 'Standardized Logging', rationale: 'Structured JSON logs are prerequisite for CloudWatch observability.', critical: false }
+              { item: 'Monorepo Conversion', rationale: 'The lead domino. Enables unified CI/CD and shared AI prompts across 30+ projects.', critical: true }
             ],
-            dependency: 'No automation without monorepo. No AI-generated features without linting. Both are hard rules.'
+            dependency: 'No automation without monorepo. This is the single prerequisite that unlocks everything else.'
           }
         },
         {
           type: 'level-detail',
-          title: 'Level 2: The Context',
+          title: 'Level 2: Standards & Context',
           content: {
-            phase: 'Instructional Layer', color: 'cyan', icon: Code,
+            phase: 'Standards & Context', color: 'cyan', icon: Code,
             checklist: [
+              { item: 'Linting & Standards', rationale: 'AI is a copy-cat. Messy code = messy AI output. Linting provides automated quality gates.', critical: true },
+              { item: 'Standardized Logging', rationale: 'Structured JSON logs are prerequisite for CloudWatch observability.', critical: true },
               { item: 'Project Documentation', rationale: 'Up-to-date README.md explaining business logic. If humans can\'t understand it, AI can\'t either.', critical: true },
               { item: 'AI Context Files', rationale: '.claudeprompt, .cursorrules, AI.md prime the AI with project-specific patterns and conventions.', critical: true }
             ],
-            dependency: 'Documentation is the highest ROI task. Benefits humans today, AI tomorrow.'
+            dependency: 'No AI-generated features without linting. Documentation is the highest ROI task — benefits humans today, AI tomorrow.'
           }
         },
         {
@@ -305,6 +332,30 @@
                       <h2 className="text-7xl font-black text-white">{slide.title}</h2>
                       <p className="text-3xl font-bold text-cyan-400">{slide.content.headline}</p>
                       <p className="text-xl text-gray-400 max-w-4xl mx-auto">{slide.content.mission}</p>
+                    </div>
+                    <div className="grid grid-cols-3 gap-8">
+                      {slide.content.cards.map((card, idx) => {
+                        const Icon = card.icon;
+                        const color = card.color;
+                        return (
+                          <div key={idx} className="group p-8 rounded-xl border transition-all duration-300 hover:border-cyan-500/30" style={{ background: 'rgba(17, 24, 39, 0.5)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+                            <div className={`w-16 h-16 rounded-lg mb-6 flex items-center justify-center bg-${color}-500/10`}>
+                              <Icon className={`w-8 h-8 text-${color}-400`} />
+                            </div>
+                            <h3 className="text-2xl font-bold mb-4">{card.title}</h3>
+                            <p className="text-gray-400 text-lg leading-relaxed">{card.body}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {slide.type === 'ask' && (
+                  <div className="space-y-12">
+                    <div className="text-center space-y-4">
+                      <h2 className="text-7xl font-black text-white">{slide.title}</h2>
+                      <p className="text-3xl font-bold text-lime-400">{slide.content.headline}</p>
                     </div>
                     <div className="grid grid-cols-3 gap-8">
                       {slide.content.cards.map((card, idx) => {
