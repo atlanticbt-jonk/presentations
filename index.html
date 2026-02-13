@@ -255,7 +255,7 @@
       const slide = slides[currentSlide];
 
       return (
-        <div className="min-h-screen bg-gray-950 text-white relative overflow-hidden" style={{ fontFamily: 'Figtree, sans-serif' }}>
+        <div className="min-h-screen bg-gray-950 text-white relative" style={{ fontFamily: 'Figtree, sans-serif' }}>
           {/* Ambient Background Orbs */}
           <div className="fixed inset-0 pointer-events-none">
             <div
@@ -285,9 +285,9 @@
               </div>
 
               {/* Slide Content */}
-              <div className="min-h-[600px] h-[600px]">
+              <div className="min-h-[600px]">
                 {slide.type === 'title' && (
-                  <div className="flex flex-col items-center justify-center h-[600px] text-center space-y-8 pt-24">
+                  <div className="flex flex-col items-center justify-center min-h-[600px] text-center space-y-8 pt-24">
                     <h1
                       className="text-7xl font-semibold leading-tight"
                       style={{ background: 'linear-gradient(to right, #22d3ee, #a855f7, #84cc16)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
