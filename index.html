@@ -5,18 +5,533 @@
   <title>Presentation</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* Ensure body has no margin and full height */
+    html, body, #root { margin: 0; padding: 0; min-height: 100vh; }
+  </style>
 </head>
 <body>
   <div id="root"></div>
-  <script type="module">
-    import React from 'https://esm.sh/react@18'
-    import ReactDOM from 'https://esm.sh/react-dom@18'
-    import * as LucideReact from 'https://esm.sh/lucide-react@0.263.1'
-    
-    // Your presentation component here - copy/paste from presentation.jsx
-    // Just change imports to use the variables above
-    
-    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(AgencyMaturityPresentation))
+
+  <script src="https://esm.sh/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://esm.sh/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide-react@0.263.1/dist/umd/lucide-react.js" crossorigin></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const { ChevronLeft, ChevronRight, Rocket, Target, Shield, Cloud, Zap, TrendingUp, FileText, Code, CheckCircle, AlertCircle } = lucideReact;
+
+    const AgencyMaturityPresentation = () => {
+      const [currentSlide, setCurrentSlide] = useState(0);
+
+      const slides = [
+        {
+          type: 'title',
+          content: {
+            title: 'AI-Augmented Software Transformation',
+            subtitle: 'A 2026 Vision for ABT Standards',
+            tagline: 'From Manual to Autonomous: A Non-Linear Path to AI-Powered Development'
+          }
+        },
+        {
+          type: 'vision',
+          title: 'The Vision',
+          content: {
+            headline: 'Engineers as Architects, Not Builders',
+            mission: 'By end of year, every feature planned, coded, and tested through high-fidelity AI prompting',
+            cards: [
+              {
+                icon: Target,
+                color: 'cyan',
+                title: 'The Challenge',
+                body: 'AI cannot navigate 30+ unique environments. We must provide consistent "rails" for autonomous development.'
+              },
+              {
+                icon: Zap,
+                color: 'lime',
+                title: 'The Shift',
+                body: 'Transition from manual development to AI-augmented workflow where humans review and approve, not build.'
+              },
+              {
+                icon: TrendingUp,
+                color: 'purple',
+                title: 'The Foundation',
+                body: 'Standardization is non-negotiable. Linting, docs, and structure enable AI to be productive, not chaotic.'
+              }
+            ]
+          }
+        },
+        {
+          type: 'philosophy',
+          title: 'Core Philosophy',
+          content: {
+            headline: 'Maturity Over Timelines',
+            principle: 'Work is non-linear. Progress happens in parallel, not sequence.',
+            benefits: [
+              { label: 'PROJECT A', value: 'Level 4', color: 'cyan', desc: 'Cloud-integrated' },
+              { label: 'PROJECT B', value: 'Level 1', color: 'lime', desc: 'Workspace setup' },
+              { label: 'PROJECT C', value: 'Level 3', color: 'purple', desc: 'Safety net active' }
+            ],
+            rules: [
+              'Downtime is productive: Pick any project, check STATUS.md, move it forward',
+              'Hard vs. Soft Dependencies: Some things must happen in order, most can happen independently',
+              'Dev/QA is autonomous: Don\'t wait for IT infrastructure. Build tests and docs today.'
+            ]
+          }
+        },
+        {
+          type: 'maturity-overview',
+          title: 'The Maturity Model',
+          content: {
+            headline: 'Five Levels to AI-Ready',
+            levels: [
+              { level: 1, name: 'The Workspace', color: 'purple', icon: FileText, focus: 'Structural', items: ['Monorepo', 'Linting', 'Logging'] },
+              { level: 2, name: 'The Context', color: 'cyan', icon: Code, focus: 'Instructional', items: ['Docs', 'AI Context'] },
+              { level: 3, name: 'The Safety Net', color: 'lime', icon: Shield, focus: 'Verification', items: ['Tests', 'Percy', 'QA Shift'] },
+              { level: 4, name: 'The Cloud', color: 'cyan', icon: Cloud, focus: 'IT Integration', items: ['CloudWatch', 'Terraform'] },
+              { level: 5, name: 'The Grand Goal', color: 'purple', icon: Rocket, focus: 'Autonomous', items: ['AI Workflow'] }
+            ]
+          }
+        },
+        {
+          type: 'level-detail',
+          title: 'Level 1: The Workspace',
+          content: {
+            phase: 'Structural Foundation', color: 'purple', icon: FileText,
+            checklist: [
+              { item: 'Monorepo Conversion', rationale: 'The lead domino. Enables unified CI/CD and shared AI prompts across 30+ projects.', critical: true },
+              { item: 'Linting & Standards', rationale: 'AI is a copy-cat. Messy code = messy AI output. Linting provides automated quality gates.', critical: true },
+              { item: 'Standardized Logging', rationale: 'Structured JSON logs are prerequisite for CloudWatch observability.', critical: false }
+            ],
+            dependency: 'No automation without monorepo. No AI-generated features without linting. Both are hard rules.'
+          }
+        },
+        {
+          type: 'level-detail',
+          title: 'Level 2: The Context',
+          content: {
+            phase: 'Instructional Layer', color: 'cyan', icon: Code,
+            checklist: [
+              { item: 'Project Documentation', rationale: 'Up-to-date README.md explaining business logic. If humans can\'t understand it, AI can\'t either.', critical: true },
+              { item: 'AI Context Files', rationale: '.claudeprompt, .cursorrules, AI.md prime the AI with project-specific patterns and conventions.', critical: true }
+            ],
+            dependency: 'Documentation is the highest ROI task. Benefits humans today, AI tomorrow.'
+          }
+        },
+        {
+          type: 'level-detail',
+          title: 'Level 3: The Safety Net',
+          content: {
+            phase: 'Verification Systems', color: 'lime', icon: Shield,
+            checklist: [
+              { item: 'Unit Tests + Coverage', rationale: 'Baseline logic tests in pipeline with transparent coverage reports.', critical: true },
+              { item: 'UI Test Baseline', rationale: 'Automated smoke tests (Playwright/Cypress) for every critical user path.', critical: true },
+              { item: 'Percy Visual Regression', rationale: 'Catches UI glitches that functional tests miss.', critical: false },
+              { item: 'QA Cultural Shift', rationale: '"Manual Once, Automate Forever." If a bug is found, automate the test immediately.', critical: true }
+            ],
+            dependency: 'Dev/QA is independent of IT. Don\'t wait for infrastructure. Build tests and docs locally today.'
+          }
+        },
+        {
+          type: 'level-detail',
+          title: 'Level 4: The Cloud',
+          content: {
+            phase: 'IT Integration', color: 'cyan', icon: Cloud,
+            checklist: [
+              { item: 'CloudWatch Observability', rationale: 'Logs piped into AWS enable proactive alerting and debugging.', critical: true },
+              { item: 'Terraform (IaC)', rationale: 'Every AWS resource defined in code. No manual point-and-click infrastructure.', critical: true },
+              { item: 'Full Pipeline Integration', rationale: 'Tests and linting from Levels 1-3 locked into deployment gate.', critical: true }
+            ],
+            dependency: 'Structured logging from Level 1 is required. CloudWatch can only monitor what applications emit.'
+          }
+        },
+        {
+          type: 'level-detail',
+          title: 'Level 5: The Grand Goal',
+          content: {
+            phase: 'Autonomous Workflow (Per Feature)', color: 'purple', icon: Rocket,
+            workflow: [
+              { step: 1, action: 'Prompt for Plan', detail: 'Human crafts prompt → AI reviews docs/code and proposes strategy → Human reviews and approves plan', color: 'purple' },
+              { step: 2, action: 'Prompt for Code', detail: 'Human crafts prompt → AI generates feature using linting/context → Human reviews and approves code', color: 'cyan' },
+              { step: 3, action: 'Prompt for Tests', detail: 'Human crafts prompt → AI generates unit/UI tests → Human reviews and approves tests', color: 'lime' },
+              { step: 4, action: 'Final Review & Deploy', detail: 'Human performs final review, adjusts as needed, and approves for deployment', color: 'cyan' }
+            ],
+            achievement: 'Repeat this workflow for every new feature. Engineers architect and review; AI generates and tests.'
+          }
+        },
+        {
+          type: 'dependencies',
+          title: 'Hard Dependencies',
+          content: {
+            headline: 'Rules of Engagement',
+            rules: [
+              { icon: AlertCircle, color: 'lime', rule: 'No Automation Without Monorepo', reason: 'Deployment logic will change too much otherwise' },
+              { icon: AlertCircle, color: 'cyan', rule: 'No AI Features Without Linting', reason: 'Prevents style debt and ensures clean AI outputs' },
+              { icon: CheckCircle, color: 'purple', rule: 'Dev/QA is Independent of IT', reason: 'Don\'t wait for Terraform/CloudWatch. Build locally today.' },
+              { icon: CheckCircle, color: 'cyan', rule: 'Documentation is the Glue', reason: 'Highest ROI task for both humans and AI agents' }
+            ]
+          }
+        },
+        {
+          type: 'implementation',
+          title: 'Implementation Tool',
+          content: {
+            headline: 'STATUS.md File',
+            description: 'Every project root will contain a maturity dashboard. Any developer can jump in and move it forward.',
+            example: `# Project Maturity Checklist
+
+### Phase A: Monorepo Foundation
+- [ ] Monorepo Conversion
+
+### Phase B: Standards & Context
+- [ ] Linting & Standards
+- [ ] Standardized Logging
+- [ ] Project Docs
+- [ ] AI Context Files
+
+### Phase C: Quality & Testing
+- [ ] Unit Tests (w/ Coverage)
+- [ ] UI Test Baseline
+- [ ] Percy Visual Regression
+- [ ] "Manual Once, Automate Forever"
+
+### Phase D: Cloud Integration
+- [ ] CloudWatch Logging Active
+- [ ] Terraform (IaC) Defined
+
+### Phase E: AI-Augmented Workflow
+- [ ] AI-Augmented Workflow Active`
+          }
+        },
+        {
+          type: 'closing',
+          title: 'Closing Vision',
+          content: {
+            headline: 'Ownership Through Decoupling',
+            vision: 'By decoupling tasks from linear timelines, we empower the team. Every box checked brings us closer to an agency that spends less time on boilerplate and more time on high-level architecture.',
+            metrics: [
+              { value: '30+', label: 'PROJECTS', sublabel: 'Simultaneous Progress', color: 'cyan' },
+              { value: '5', label: 'MATURITY LEVELS', sublabel: 'Non-Linear Path', color: 'lime' },
+              { value: '100%', label: 'AI-AUGMENTED', sublabel: 'End Goal', color: 'purple' }
+            ],
+            cta: 'Whether QA, Dev, or IT, every contribution moves the entire agency forward.'
+          }
+        }
+      ];
+
+      // Keyboard navigation
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (e.key === 'ArrowLeft' && currentSlide > 0) {
+            setCurrentSlide(currentSlide - 1);
+          } else if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+            setCurrentSlide(currentSlide + 1);
+          }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [currentSlide, slides.length]);
+
+      const nextSlide = () => { if (currentSlide < slides.length - 1) setCurrentSlide(currentSlide + 1); };
+      const prevSlide = () => { if (currentSlide > 0) setCurrentSlide(currentSlide - 1); };
+
+      const slide = slides[currentSlide];
+
+      return (
+        <div className="min-h-screen bg-gray-950 text-white relative overflow-hidden" style={{ fontFamily: 'Figtree, sans-serif' }}>
+          {/* Ambient Background Orbs */}
+          <div className="fixed inset-0 pointer-events-none">
+            <div
+              className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%)', filter: 'blur(100px)' }}
+            />
+            <div
+              className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%)', filter: 'blur(100px)' }}
+            />
+          </div>
+
+          {/* Main Content Container */}
+          <div className="relative min-h-screen flex items-center justify-center p-8">
+            <div
+              className="w-full max-w-7xl rounded-2xl shadow-2xl border border-white/5 p-16 relative"
+              style={{ background: 'rgba(17, 24, 39, 0.4)', backdropFilter: 'blur(24px)' }}
+            >
+              {/* Progress Indicator */}
+              <div className="absolute top-8 right-8 flex gap-2">
+                {slides.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'w-8 bg-cyan-400' : 'w-2 bg-gray-700'}`}
+                  />
+                ))}
+              </div>
+
+              {/* Slide Content */}
+              <div className="min-h-[600px] h-[600px]">
+                {slide.type === 'title' && (
+                  <div className="flex flex-col items-center justify-center h-[600px] text-center space-y-8 pt-24">
+                    <h1
+                      className="text-7xl font-semibold leading-tight"
+                      style={{ background: 'linear-gradient(to right, #22d3ee, #a855f7, #84cc16)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
+                    >
+                      {slide.content.title}
+                    </h1>
+                    <p className="text-4xl font-normal text-gray-300">{slide.content.subtitle}</p>
+                    <p className="text-xl text-gray-500 max-w-3xl tracking-wide">{slide.content.tagline}</p>
+                  </div>
+                )}
+
+                {slide.type === 'vision' && (
+                  <div className="space-y-12">
+                    <div className="text-center space-y-4">
+                      <h2 className="text-7xl font-black text-white">{slide.title}</h2>
+                      <p className="text-3xl font-bold text-cyan-400">{slide.content.headline}</p>
+                      <p className="text-xl text-gray-400 max-w-4xl mx-auto">{slide.content.mission}</p>
+                    </div>
+                    <div className="grid grid-cols-3 gap-8">
+                      {slide.content.cards.map((card, idx) => {
+                        const Icon = card.icon;
+                        const color = card.color;
+                        return (
+                          <div key={idx} className="group p-8 rounded-xl border transition-all duration-300 hover:border-cyan-500/30" style={{ background: 'rgba(17, 24, 39, 0.5)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+                            <div className={`w-16 h-16 rounded-lg mb-6 flex items-center justify-center bg-${color}-500/10`}>
+                              <Icon className={`w-8 h-8 text-${color}-400`} />
+                            </div>
+                            <h3 className="text-2xl font-bold mb-4">{card.title}</h3>
+                            <p className="text-gray-400 text-lg leading-relaxed">{card.body}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {slide.type === 'philosophy' && (
+                  <div className="space-y-12">
+                    <div className="text-center space-y-4">
+                      <h2 className="text-7xl font-black text-white">{slide.title}</h2>
+                      <p className="text-3xl font-bold text-lime-400">{slide.content.headline}</p>
+                      <p className="text-xl text-gray-400 max-w-4xl mx-auto">{slide.content.principle}</p>
+                    </div>
+                    <div className="grid grid-cols-3 gap-6">
+                      {slide.content.benefits.map((benefit, idx) => {
+                        const color = benefit.color;
+                        return (
+                          <div key={idx} className="text-center p-8 rounded-xl" style={{ background: 'rgba(17, 24, 39, 0.5)' }}>
+                            <div className="text-xs uppercase tracking-widest text-gray-500 mb-2">{benefit.label}</div>
+                            <div className={`text-5xl font-black text-${color}-400 mb-2`}>{benefit.value}</div>
+                            <div className="text-gray-400">{benefit.desc}</div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="space-y-4 mt-12">
+                      {slide.content.rules.map((rule, idx) => (
+                        <div key={idx} className="p-6 rounded-lg border border-white/10" style={{ background: 'rgba(17, 24, 39, 0.3)' }}>
+                          <p className="text-lg text-gray-300">{rule}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {slide.type === 'maturity-overview' && (
+                  <div className="space-y-12">
+                    <div className="text-center space-y-4">
+                      <h2 className="text-7xl font-black text-white">{slide.title}</h2>
+                      <p className="text-3xl font-bold text-purple-400">{slide.content.headline}</p>
+                    </div>
+                    <div className="space-y-6">
+                      {slide.content.levels.map((level, idx) => {
+                        const Icon = level.icon;
+                        const color = level.color;
+                        return (
+                          <div key={idx} className="group flex items-center gap-8 p-8 rounded-xl border transition-all duration-300 hover:border-cyan-500/30" style={{ background: 'rgba(17, 24, 39, 0.5)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+                            <div className={`flex-shrink-0 w-24 h-24 rounded-xl flex items-center justify-center bg-${color}-500/10`}>
+                              <Icon className={`w-12 h-12 text-${color}-400`} />
+                            </div>
+                            <div className="flex-grow">
+                              <div className="flex items-baseline gap-4 mb-2">
+                                <span className={`text-6xl font-black text-${color}-400`}>{level.level}</span>
+                                <span className="text-3xl font-bold text-white">{level.name}</span>
+                                <span className="text-sm uppercase tracking-widest text-gray-500">{level.focus}</span>
+                              </div>
+                              <div className="flex gap-3">
+                                {level.items.map((item, i) => (
+                                  <span key={i} className="px-4 py-2 rounded-lg text-sm border border-white/10" style={{ background: 'rgba(17, 24, 39, 0.5)' }}>{item}</span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {slide.type === 'level-detail' && (
+                  <div className="space-y-8">
+                    <div className="flex items-center gap-6 mb-12">
+                      {(() => {
+                        const Icon = slide.content.icon;
+                        const color = slide.content.color;
+                        return (
+                          <>
+                            <div className={`w-24 h-24 rounded-xl flex items-center justify-center bg-${color}-500/10`}>
+                              <Icon className={`w-12 h-12 text-${color}-400`} />
+                            </div>
+                            <div>
+                              <h2 className="text-6xl font-black text-white">{slide.title}</h2>
+                              <p className={`text-2xl font-bold text-${color}-400 mt-2`}>{slide.content.phase}</p>
+                            </div>
+                          </>
+                        );
+                      })()}
+                    </div>
+
+                    <div className="space-y-6">
+                      {slide.content.checklist && slide.content.checklist.map((item, idx) => (
+                        <div key={idx} className="p-6 rounded-xl border" style={{ background: 'rgba(17, 24, 39, 0.5)', borderColor: item.critical ? 'rgba(6, 182, 212, 0.3)' : 'rgba(255, 255, 255, 0.1)' }}>
+                          <div className="flex items-start gap-4">
+                            <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center ${item.critical ? 'bg-cyan-500/20' : 'bg-gray-700/50'}`}>
+                              {item.critical ? <CheckCircle className="w-5 h-5 text-cyan-400" /> : <AlertCircle className="w-5 h-5 text-gray-500" />}
+                            </div>
+                            <div className="flex-grow">
+                              <h3 className="text-xl font-bold mb-2">{item.item}</h3>
+                              <p className="text-gray-400 leading-relaxed">{item.rationale}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {slide.content.workflow && (
+                        <div className="space-y-6">
+                          {slide.content.workflow.map((step, idx) => {
+                            const color = step.color;
+                            return (
+                              <div key={idx} className="flex items-start gap-6 p-6 rounded-xl border border-white/10" style={{ background: 'rgba(17, 24, 39, 0.5)' }}>
+                                <div className={`flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center bg-${color}-500/10`}>
+                                  <span className={`text-3xl font-black text-${color}-400`}>{step.step}</span>
+                                </div>
+                                <div>
+                                  <h3 className="text-2xl font-bold mb-2">{step.action}</h3>
+                                  <p className="text-gray-400 text-lg">{step.detail}</p>
+                                </div>
+                              </div>
+                            );
+                          })}
+                          <div className="p-8 rounded-xl text-center border-2 border-purple-500/30" style={{ background: 'rgba(168, 85, 247, 0.1)' }}>
+                            <p className="text-2xl font-bold text-purple-300">{slide.content.achievement}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {slide.content.dependency && (
+                      <div className="mt-8 p-6 rounded-xl border-l-4" style={{ background: 'rgba(17, 24, 39, 0.3)', borderLeftColor: 'rgb(239, 68, 68)' }}>
+                        <p className="text-lg font-bold text-red-400 mb-2">DEPENDENCY RULE</p>
+                        <p className="text-gray-300">{slide.content.dependency}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {slide.type === 'dependencies' && (
+                  <div className="space-y-12">
+                    <div className="text-center space-y-4">
+                      <h2 className="text-7xl font-black text-white">{slide.title}</h2>
+                      <p className="text-3xl font-bold text-cyan-400">{slide.content.headline}</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-8">
+                      {slide.content.rules.map((rule, idx) => {
+                        const Icon = rule.icon;
+                        const color = rule.color;
+                        return (
+                          <div key={idx} className="p-8 rounded-xl border transition-all duration-300 hover:border-cyan-500/30" style={{ background: 'rgba(17, 24, 39, 0.5)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+                            <div className={`w-16 h-16 rounded-lg mb-6 flex items-center justify-center bg-${color}-500/10`}>
+                              <Icon className={`w-8 h-8 text-${color}-400`} />
+                            </div>
+                            <h3 className="text-2xl font-bold mb-4">{rule.rule}</h3>
+                            <p className="text-gray-400 text-lg leading-relaxed">{rule.reason}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {slide.type === 'implementation' && (
+                  <div className="space-y-12">
+                    <div className="text-center space-y-4">
+                      <h2 className="text-7xl font-black text-white">{slide.title}</h2>
+                      <p className="text-3xl font-bold text-lime-400">{slide.content.headline}</p>
+                      <p className="text-xl text-gray-400 max-w-4xl mx-auto">{slide.content.description}</p>
+                    </div>
+                    <div className="p-8 rounded-xl border border-white/10 text-sm" style={{ background: 'rgba(0, 0, 0, 0.5)', fontFamily: 'Figtree, monospace' }}>
+                      <pre className="text-gray-300 whitespace-pre-wrap leading-relaxed">{slide.content.example}</pre>
+                    </div>
+                  </div>
+                )}
+
+                {slide.type === 'closing' && (
+                  <div className="space-y-12">
+                    <div className="text-center space-y-6">
+                      <h2 className="text-7xl font-black text-white">{slide.title}</h2>
+                      <p className="text-4xl font-bold text-purple-400">{slide.content.headline}</p>
+                      <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">{slide.content.vision}</p>
+                    </div>
+                    <div className="grid grid-cols-3 gap-8">
+                      {slide.content.metrics.map((metric, idx) => {
+                        const color = metric.color;
+                        return (
+                          <div key={idx} className="text-center p-12 rounded-xl border border-white/10" style={{ background: 'rgba(17, 24, 39, 0.5)' }}>
+                            <div className={`text-7xl font-black mb-4 text-${color}-400`}>{metric.value}</div>
+                            <div className="text-xs uppercase tracking-widest text-gray-500 mb-2">{metric.label}</div>
+                            <div className="text-gray-400">{metric.sublabel}</div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="text-center p-8 rounded-xl border-2" style={{ background: 'rgba(168, 85, 247, 0.1)', borderColor: 'rgba(168, 85, 247, 0.3)' }}>
+                      <p className="text-2xl font-bold text-purple-300">{slide.content.cta}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={prevSlide}
+                disabled={currentSlide === 0}
+                className="absolute left-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:scale-110"
+                style={{ background: 'rgba(17, 24, 39, 0.8)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                disabled={currentSlide === slides.length - 1}
+                className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:scale-110"
+                style={{ background: 'rgba(17, 24, 39, 0.8)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+
+          {/* Footer Status Bar */}
+          <div className="fixed bottom-0 left-0 right-0 py-4 text-center">
+            <p className="text-xs uppercase tracking-widest text-gray-600">
+              Proprietary &amp; Confidential · © 2026 Agency Development Framework
+            </p>
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<AgencyMaturityPresentation />);
   </script>
 </body>
 </html>
